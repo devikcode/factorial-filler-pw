@@ -1,0 +1,21 @@
+{
+  "name": "factorial-pw",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "pw": "playwright test",
+    "pw:headed": "playwright test --headed",
+    "pw:report": "playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}
