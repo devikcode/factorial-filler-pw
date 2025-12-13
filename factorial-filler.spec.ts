@@ -4,12 +4,15 @@ import { logSummary } from './src/utils';
 
 dotenv.config({ quiet: true });
 
-const EMAIL = process.env.FACTORIAL_EMAIL || '';
-const PASSWORD = process.env.FACTORIAL_PASSWORD || '';
+const EMAIL = process.env.FACTORIAL_EMAIL;
+const PASSWORD = process.env.FACTORIAL_PASSWORD;
 const PROJECT_NAME = process.env.FACTORIAL_PROJECT_NAME;
 
 if (!EMAIL || !PASSWORD) {
   throw new Error('FACTORIAL_EMAIL and FACTORIAL_PASSWORD must be set in .env file');
+}
+if (!PROJECT_NAME) {
+  console.warn('⚠️ WARNING: FACTORIAL_PROJECT_NAME is not set in .env file. Shifts will be filled without a project.');
 }
 
 // Optional: Override month/year (defaults to current month/year)
