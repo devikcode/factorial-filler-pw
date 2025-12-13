@@ -37,10 +37,10 @@ test('Fill factorial', async ({ page, actions, locators }) => {
   await actions.waitForAttendanceTable();
 
   // Find dates with target deficit
-  const { deficitsInTargetDates, otherDeficitDates } = await actions.categorizeDeficits(hoursDeficitText);
+  const { targetDeficitDates, otherDeficitDates } = await actions.categorizeDeficits(hoursDeficitText);
 
   const datesFilled: string[] = [];
-  for (const date of deficitsInTargetDates) {
+  for (const date of targetDeficitDates) {
     const row = locators.getRowByDate(date);
 
     await actions.fillDayWithStandardSchedule(
@@ -60,5 +60,5 @@ test('Fill factorial', async ({ page, actions, locators }) => {
     datesFilled.push(date);
   }
   
-  logSummary(hoursDeficitText, deficitsInTargetDates, otherDeficitDates, datesFilled);
+  logSummary(hoursDeficitText, targetDeficitDates, otherDeficitDates, datesFilled);
 });

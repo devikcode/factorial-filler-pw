@@ -5,7 +5,7 @@ import { extractDateFromRow } from "./utils";
 type ShiftType = 'Work' | 'Break';
 
 export type DeficitResult = {
-    deficitsInTargetDates: string[];
+    targetDeficitDates: string[];
     otherDeficitDates: Array<{ date: string; deficit: string }>;
 };
 
@@ -37,7 +37,7 @@ export class Actions {
     async categorizeDeficits(targetDeficit: string): Promise<DeficitResult> {
         const allRows = await this.locators.getAllRows();
         const deficitRegex = /-\d+h/;
-        const deficitsInTargetDates: string[] = [];
+        const targetDeficitDates: string[] = [];
         const otherDeficitDates: Array<{ date: string; deficit: string }> = [];
         
         for (const row of allRows) {
@@ -49,14 +49,14 @@ export class Actions {
                 const date = await extractDateFromRow(row);
                 
                 if (text.includes(targetDeficit)) {
-                    deficitsInTargetDates.push(date);
+                    targetDeficitDates.push(date);
                 } else {
                     otherDeficitDates.push({ date, deficit });
                 }
             }
         }
         
-        return { deficitsInTargetDates, otherDeficitDates };
+        return { targetDeficitDates, otherDeficitDates };
     }
 
     async addShiftToRow(expandedRow: Locator, shiftType: ShiftType, startTime: string, endTime: string): Promise<void> {
