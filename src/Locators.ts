@@ -28,11 +28,12 @@ export class Locators {
   getRowToggleButton: (row: Locator) => Locator;
   getAddShiftButton: (expandedRow: Locator) => Locator;
   getOptionsButton: (expandedRow: Locator) => Locator;
-  getShiftDialog: () => Locator;
+  shiftDialog: Locator;
   getShiftTypeButton: (dialog: Locator, shiftType: string) => Locator;
   getStartTimeInput: (dialog: Locator) => Locator;
   getEndTimeInput: (dialog: Locator) => Locator;
   getApplyButton: (dialog: Locator) => Locator;
+  projectList: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -62,10 +63,11 @@ export class Locators {
     this.getRowToggleButton = (row: Locator) => row.locator('button[data-intercom-target="attendance-row-toggle"]');
     this.getAddShiftButton = (expandedRow: Locator) => expandedRow.locator('button[data-intercom-target="attendance-row-add-shift-button"]');
     this.getOptionsButton = (expandedRow: Locator) => expandedRow.locator('button[data-intercom-target="attendance-row-options-button"]');
-    this.getShiftDialog = () => this.page.locator('[role="dialog"]').last();
+    this.shiftDialog = this.page.locator('[role="dialog"]').last();
     this.getShiftTypeButton = (dialog: Locator, shiftType: string) => dialog.locator('button').filter({ hasText: shiftType });
     this.getStartTimeInput = (dialog: Locator) => dialog.locator('input[type="text"]').first();
     this.getEndTimeInput = (dialog: Locator) => dialog.locator('input[type="text"]').nth(1);
     this.getApplyButton = (dialog: Locator) => dialog.locator('button').filter({ hasText: 'Apply' });
+    this.projectList = this.page.locator('ul').filter({ has: this.page.locator('input[role="searchbox"]') });
   }
 }
