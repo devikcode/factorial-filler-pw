@@ -1,4 +1,4 @@
-import { Locator } from "@playwright/test";
+import { expect, Locator } from "@playwright/test";
 import { Locators } from "./locators";
 import { extractDateFromRow } from "./utils";
 
@@ -130,12 +130,26 @@ export class Actions {
         const projectDropdowns = await this.locators.projectDropdown.all();
 
         for (const dropdown of projectDropdowns) {
+            await dropdown.scrollIntoViewIfNeeded();
+            await this.locators.page.waitForTimeout(300);
+            
+            // Click dropdown to open list
             await dropdown.click();
-            await this.locators.page.waitForTimeout(500);
+            
+            // Wait for project list to be visible
+            const projectList = this.locators.projectList;
+            await projectList.waitFor({ state: 'visible', timeout: 3000 });
+            await this.locators.page.waitForTimeout(700);
             
             // Select project from list
-            await this.locators.projectList.getByText(projectName, { exact: true }).click();
-            await this.locators.page.waitForTimeout(500);
+            const projectOption = projectList.getByText(projectName, { exact: true });
+            await projectOption.scrollIntoViewIfNeeded();
+            await this.locators.page.waitForTimeout(300);
+            await projectOption.click();
+            
+            // Wait for dropdown value to change from "Select" to the project name
+            await expect(dropdown).not.toHaveValue('Select', { timeout: 3000 });
+            await this.locators.page.waitForTimeout(700);
         }
         
         // Save changes and wait for panel to close
