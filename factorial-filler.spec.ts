@@ -59,6 +59,7 @@ test('Fill factorial', async ({ page, actions, locators }) => {
     if (PROJECT_NAME) {
       await actions.addProjectToShift(row, PROJECT_NAME);
     }
+    console.log(`✅ Filled: ${date}`);
     
     datesFilled.push(date);
   }

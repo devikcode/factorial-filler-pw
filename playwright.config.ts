@@ -6,7 +6,9 @@ export default defineConfig({
   reporter: 'html',
   use: {
     screenshot: 'only-on-failure',
+    trace: 'on'
   },
+  timeout: 120000,
   projects: [
     {
       name: 'chromium',

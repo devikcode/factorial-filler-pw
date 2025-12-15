@@ -66,8 +66,7 @@ export class Actions {
         await addButton.click();
 
         // Wait for dialog
-        const dialog = this.locators.getShiftDialog();
-        await dialog.waitFor({ state: 'visible', timeout: 5000 });
+        const dialog = this.locators.shiftDialog;
 
         // Select shift type (Work or Break)
         const shiftButton = this.locators.getShiftTypeButton(dialog, shiftType);
@@ -85,7 +84,6 @@ export class Actions {
         // Apply changes and wait for dialog to close
         const applyButton = this.locators.getApplyButton(dialog);
         await applyButton.click();
-        await dialog.waitFor({ state: 'hidden', timeout: 5000 });
         await this.locators.page.waitForTimeout(500);
     }
 
@@ -137,8 +135,9 @@ export class Actions {
             await dropdown.scrollIntoViewIfNeeded();
             await dropdown.click();
             await this.locators.page.waitForTimeout(500);
-            // Select project by exact name match
-            await this.locators.page.getByText(projectName, { exact: true }).click();
+            
+            // Select project from list
+            await this.locators.projectList.getByText(projectName, { exact: true }).click();
             await this.locators.page.waitForTimeout(500);
         }
         
