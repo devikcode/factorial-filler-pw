@@ -32,6 +32,6 @@ export const logSummary = (
     if (deficitsInTargetDates.length === 0) {
         console.log(`ℹ️ No days with ${targetDeficit} deficit found. Nothing to fill.`);
     } else {
-        console.log(`✅ Successfully filled ${datesFilled.length} days: ${datesFilled.join(', ')}`);
+        console.log(`🤖 My job here is done!🦾 \nℹ️ Successfully filled ${datesFilled.length} day/s: ${datesFilled.join(', ')}`);
     }
 };
