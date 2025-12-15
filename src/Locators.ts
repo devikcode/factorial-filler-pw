@@ -51,7 +51,7 @@ export class Locators {
     this.attendanceTable = this.page.locator('table.hackSafari');
     
     // Project management
-    this.addEditProjectsMenuItem = this.page.getByRole('menuitem', { name: /Add\/Edit projects/i });
+    this.addEditProjectsMenuItem = this.page.getByRole('menuitem', { name: /(Add\/Edit projects|Select projects)/i });
     this.projectPanel = this.page.getByLabel('Project tracking');
     this.projectDropdown = this.page.getByRole('textbox', { name: /Select a project/i });
     this.editProjectsButton = this.page.getByRole('button', { name: 'Edit projects' });

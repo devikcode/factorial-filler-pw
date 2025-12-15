@@ -62,7 +62,6 @@ export class Actions {
     async addShiftToRow(expandedRow: Locator, shiftType: ShiftType, startTime: string, endTime: string): Promise<void> {
         // Click Add button in the expanded row
         const addButton = this.locators.getAddShiftButton(expandedRow);
-        await addButton.scrollIntoViewIfNeeded();
         await addButton.click();
 
         // Wait for dialog
@@ -118,7 +117,6 @@ export class Actions {
     async addProjectToShift(expandedRow: Locator, projectName: string): Promise<void> {
         // Open options menu for the shift
         const optionsButton = this.locators.getOptionsButton(expandedRow);
-        await optionsButton.scrollIntoViewIfNeeded();
         await optionsButton.click();
         await this.locators.page.waitForTimeout(500);
 
@@ -132,7 +130,6 @@ export class Actions {
         const projectDropdowns = await this.locators.projectDropdown.all();
 
         for (const dropdown of projectDropdowns) {
-            await dropdown.scrollIntoViewIfNeeded();
             await dropdown.click();
             await this.locators.page.waitForTimeout(500);
             
